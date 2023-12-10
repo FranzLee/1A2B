@@ -116,7 +116,7 @@ function probably() {
 
     for(j = 0; j < length; j++) {
         console.log(j);
-        if(playerResult != xAxB(probablyAnswers[j], target, 'number')) {
+        if(playerResult != xAxB(probablyAnswers[j], playerAnswer, 'number')) {
             console.log('markup'+ j);
             probablyAnswers[j]= '0000';
         }
