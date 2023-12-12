@@ -36,13 +36,13 @@
 }
 </style>
 </head>
-<body onload="startGame()">
+<body>
 <script>
 var target = 0;
-var playerAnswer = 0;
-var A = 0;
-var B = 0;
-var times = 0;
+var playerCode = 0;
+var ansAll = 0;
+var ansA = 0;
+var ansB = 0;
 const probablyAnswers = [];
 
 // 取1~x中隨機整數
@@ -111,12 +111,11 @@ function setProbablyAnswers(){
 
 // 計算剩餘可能性
 function probably() {
-    var playerResult = xAxB(playerAnswer, target, 'number');
     var length = probablyAnswers.length;
 
     for(j = 0; j < length; j++) {
         console.log(j);
-        if(playerResult != xAxB(probablyAnswers[j], playerAnswer, 'number')) {
+        if(ansAll != xAxB(probablyAnswers[j], playerCode, 'number')) {
             console.log('markup'+ j);
             probablyAnswers[j]= '0000';
         }
@@ -127,8 +126,6 @@ function probably() {
         if(probablyAnswers[i] == '0000')
             probablyAnswers.splice(i, 1);
     }
-    
-    return probablyAnswers.length;
 }
 
 // 判斷input、target為幾A幾B
@@ -173,45 +170,42 @@ function xAxB(input, target, type) {
         return  A + 'A' + B + 'B';    
     }
     else if(type == 'number'){
-        return A + (B * 0.1);
+       return Math.round(A) + (Math.round(B) * 0.1); // js在計算數值(尤其是Math.floor())常會出現一些莫名小數，需過濾
     }
     return 'error!';
 }
 
-// onload後先設定題目
-function startGame() {
-    while(!check(target)) {
-    target = getRandom(10000);
-    }
-}
-
 // button被按下後執行，並回應
 function inquire() {
-    document.getElementById("correction").innerHTML = ''
-    playerAnswer = document.getElementById("answer").value;
-    playerAnswer = Number(playerAnswer);
-    if (check(playerAnswer) == false) {
-        document.getElementById("correction").innerHTML = '您的輸入格式有誤，請確認後再重新輸入(如有問題請回覆error code給管理員)';
+    document.getElementById("answer").innerHTML = ''
+    playerCode = document.getElementById("code").value;
+    ansA = Number(document.getElementById("responseA").value);
+    ansB = Number(document.getElementById("responseB").value);
+    ansAll = Math.round(ansA) + (Math.round(ansB)) * 0.1;
+    var playerCodeString = playerCode
+    playerCode = Number(playerCode);
+    if (check(playerCode) == false) {
+        document.getElementById("answer").innerHTML = '您的密碼輸入格式有誤!';
+        console.log('false!');
+    }
+    else if(ansA < 0 || ansA >= 4 || ansB < 0 || ansB > 4 || ansA + ansB > 4 || !isInteger(ansA) || !isInteger(ansB)) {
+        document.getElementById("answer").innerHTML = '您輸入的結果格式有誤!';
         console.log('false!');
     }
     else {
-        times += 1;
-        if (playerAnswer == target) {
-            document.getElementById("correction").innerHTML = '恭喜猜中正確答案(您共猜了' + times + '次)';
-        }
-        else {
-            document.getElementById("answered").innerHTML = playerAnswer + '-->' + xAxB(playerAnswer, target, 'text') + '(還剩下' + probably() + '種可能性)' + '<br></br>' + document.getElementById("answered").innerHTML;
-        }
+        probably();
+        document.getElementById("answer").innerHTML = '請猜猜看' + probablyAnswers[getRandom(probablyAnswers.length)] + '(目前還剩下' + probablyAnswers.length + '種可能)';
     }
 }
 
 setProbablyAnswers();
 </script>
-<p class="styleTopic" id="guide">1A2B小遊戲</p>
-<input type="text" id="answer" name="answer" placeholder="請輸入四位數密碼"><br>
-<input class="styledButton" type="button" value="送出" onclick="inquire()">
-<p class="styleText" id="correction"></p>
-<p class="styleText" id="answered"></p>
+<p class="styleTopic" id="guide">1A2B破解器(4位數、各位數不重複)</p>
+<p class="styleText" id="describition">這個破解器可以幫助您猜出1A2B的答案，請在以下二格分別輸入您的猜測密碼及結果</p><br></br>
+<input type="text" id="code" name="code" placeholder="您輸入的密碼(eg.1234)"><br></br>
+<input type="text" id="responseA" name="response" placeholder="1" size="2">A<input type="text" id="responseB" name="response" placeholder="1" size="2">B<br></br>
+<input class="styledButton" type="button" value="查詢" onclick="inquire()">
+<p class="styleText" id="answer"></p>
 
 </body>
 </html>
