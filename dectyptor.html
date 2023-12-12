@@ -38,12 +38,13 @@
 </head>
 <body>
 <script>
-var target = 0;
 var playerCode = 0;
 var ansAll = 0;
 var ansA = 0;
 var ansB = 0;
 const probablyAnswers = [];
+var A = 0;
+var B = 0;
 
 // 取1~x中隨機整數
 function getRandom(x) {
@@ -115,8 +116,9 @@ function probably() {
 
     for(j = 0; j < length; j++) {
         console.log(j);
-        if(ansAll != xAxB(probablyAnswers[j], playerCode, 'number')) {
-            console.log('markup'+ j);
+        xAxB(probablyAnswers[j], playerCode);
+        if(ansA != A || ansB != B) {
+            console.log('markup'+ probablyAnswers[j]);
             probablyAnswers[j]= '0000';
         }
     }
@@ -129,7 +131,7 @@ function probably() {
 }
 
 // 判斷input、target為幾A幾B
-function xAxB(input, target, type) {
+function xAxB(input, target) {
     var inputKey = []
     var x = Number(input);
     inputKey.push(Math.floor(x / 1000));
@@ -150,8 +152,8 @@ function xAxB(input, target, type) {
     y = y - (targetKey[2] * 10);
     targetKey.push(y);
 
-    var A = 0;
-    var B = 0;
+    A = 0;
+    B = 0;
 
     for(i = 0; i < 4; i++){
         for(k = 0; k < 4; k++){ 
@@ -165,14 +167,7 @@ function xAxB(input, target, type) {
             }
         }
     }
-
-    if(type == 'text'){
-        return  A + 'A' + B + 'B';    
-    }
-    else if(type == 'number'){
-       return Math.round(A) + (Math.round(B) * 0.1); // js在計算數值(尤其是Math.floor())常會出現一些莫名小數，需過濾
-    }
-    return 'error!';
+    // return Math.round(A) + (Math.round(B) * 0.1); // js在計算數值(尤其是Math.floor())常會出現一些莫名小數，需過濾
 }
 
 // button被按下後執行，並回應
@@ -194,7 +189,7 @@ function inquire() {
     }
     else {
         probably();
-        document.getElementById("answer").innerHTML = '請猜猜看' + probablyAnswers[getRandom(probablyAnswers.length)] + '(目前還剩下' + probablyAnswers.length + '種可能)';
+        document.getElementById("answer").innerHTML = '請猜猜看' + probablyAnswers[getRandom(probablyAnswers.length) - 1] + '(目前還剩下' + probablyAnswers.length + '種可能)';
     }
 }
 
