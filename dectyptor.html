@@ -63,11 +63,11 @@ function isInteger(x) {
 
 // 檢查x是否符合規則
 function check(x) {
-    if(!isInteger(x)) {
+    if (!isInteger(x)) {
         console.log('error code:1');
         return false;
     }
-    if(x > 9999 && x < 1000){
+    if ((x > 9999) && (x < 1000)) {
         console.log('error code:2');
         return false;
     }
@@ -79,7 +79,7 @@ function check(x) {
     this.third = Math.floor(x / 10);
     x = x - (this.third * 10);
     this.forth = x;
-    if(this.first == this.second || this.first == this.third || this.first == this.forth || this.second == this.third || this.second == this.forth || this.third == this.forth) {
+    if ((this.first == this.second) || (this.first == this.third) || (this.first == this.forth) || (this.second == this.third) || (this.second == this.forth) || (this.third == this.forth)) {
         console.log('error code:3');
         return false;
     }
