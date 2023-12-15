@@ -183,7 +183,7 @@ function inquire() {
         document.getElementById("answer").innerHTML = '您的密碼輸入格式有誤!';
         console.log('false!');
     }
-    else if(ansA < 0 || ansA >= 4 || ansB < 0 || ansB > 4 || ansA + ansB > 4 || !isInteger(ansA) || !isInteger(ansB)) {
+    else if ((ansA < 0) || (ansA >= 4) || (ansB < 0) || (ansB > 4) || (ansA + ansB > 4) || (!isInteger(ansA)) || (!isInteger(ansB))) {
         document.getElementById("answer").innerHTML = '您輸入的結果格式有誤!';
         console.log('false!');
     }
