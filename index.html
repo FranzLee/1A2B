@@ -4,13 +4,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="startGame()">
+<body>
 <p class="styleTopic" id="guide">1A2B小遊戲</p>
-<input type="text" id="answer" name="answer" placeholder="請輸入四位數密碼"><br></br>
-<input class="styledButton" type="button" value="送出" onclick="inquire()">
-<p class="styleText" id="correction"></p>
-<p class="styleText" id="answered"></p>
-解不開嗎?請點<a href="./dectyptor.html">這裡</a>，開啟破解器
+<div id="gameStarted" hidden="hidden">
+    <input type="text" id="answer" name="answer" placeholder="請輸入四位數密碼" /><br></br>
+    <input class="styledButton" type="button" value="送出" onclick="showInquireResult()" />
+    <p class="styleText" id="correction"></p>
+    <p class="styleText" id="answered"></p>
+    解不開嗎?請點<a href="./dectyptor.html">這裡</a>，開啟破解器    
+</div>
+<p></p>
+<hr/>
+<div id="beforeGame">
+    <input id="btnNewGame" class="styledButton" type="button" value="開始新遊戲" onclick="startNewGame()" />
+</div>
 </body>
 <script src="host.js"></script>
+<script>
+function startNewGame() {
+    newRound();
+    
+    document.getElementById("gameStarted").style.display = 'block';
+    document.getElementById("btnNewGame").value = "重新遊戲";
+}
+
+function showInquireResult() {
+    var playerAnswerString = playerAnswer;
+    var result = inquire();
+    if (result == 'invalid input') {
+        document.getElementById("correction").innerHTML = '您的輸入格式有誤，請確認後再重新輸入(如有問題請回覆error code給管理員)';
+    }
+    else if (result.gameStatus === 'finish') {
+            document.getElementById("correction").innerHTML = '恭喜猜中正確答案(您共猜了' + times + '次)';
+    }
+    else if (result.gameStatus === 'continue') {
+        document.getElementById("answered").innerHTML = playerAnswerString + '-->' + result.xAxB + '(還剩下' + result.numPossible + '種可能性)' + '<br></br>' + document.getElementById("answered").innerHTML;
+    }
+    else {
+        console.log('impossible execution path');
+    }
+}
+</script>
 </html>

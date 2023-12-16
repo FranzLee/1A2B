@@ -151,16 +151,19 @@ function inquire() {
     var playerCodeString = playerCode
     playerCode = Number(playerCode);
     if (check(playerCode) == false) {
-        document.getElementById("answer").innerHTML = '您的密碼輸入格式有誤!';
         console.log('false!');
+        return 'invalid input';
     }
     else if ((ansA < 0) || (ansA >= 4) || (ansB < 0) || (ansB > 4) || (ansA + ansB > 4) || (!isInteger(ansA)) || (!isInteger(ansB))) {
-        document.getElementById("answer").innerHTML = '您輸入的結果格式有誤!';
         console.log('false!');
+        return 'invalid hint';
     }
     else {
         probably();
-        document.getElementById("answer").innerHTML = '請猜猜看' + probablyAnswers[getRandom(probablyAnswers.length) - 1] + '(目前還剩下' + probablyAnswers.length + '種可能)';
+        return {
+            suggest: probablyAnswers[getRandom(probablyAnswers.length) - 1], 
+            numPossible: probablyAnswers.length
+        };
     }
 }
 

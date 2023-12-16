@@ -150,7 +150,7 @@ function xAxB(input, target, type) {
 }
 
 // onload後先設定題目
-function startGame() {
+function newRound() {
     while(!check(target)) {
         target = getRandom(10000);
     }
@@ -160,19 +160,26 @@ function startGame() {
 function inquire() {
     document.getElementById("correction").innerHTML = ''
     playerAnswer = document.getElementById("answer").value;
-    var playerAnswerString = playerAnswer
+    var playerAnswerString = playerAnswer;
     playerAnswer = Number(playerAnswer);
     if (check(playerAnswer) == false) {
-        document.getElementById("correction").innerHTML = '您的輸入格式有誤，請確認後再重新輸入(如有問題請回覆error code給管理員)';
         console.log('false!');
+        return 'invalid input';
     }
     else {
         times += 1;
         if (playerAnswer == target) {
-            document.getElementById("correction").innerHTML = '恭喜猜中正確答案(您共猜了' + times + '次)';
+            return {
+                gameStatus: 'finish', 
+                times: times
+            };
         }
         else {
-            document.getElementById("answered").innerHTML = playerAnswerString + '-->' + xAxB(playerAnswer, target, 'text') + '(還剩下' + probably() + '種可能性)' + '<br></br>' + document.getElementById("answered").innerHTML;
+            return {
+                gameStatus: 'continue', 
+                xAxB: xAxB(playerAnswer, target, 'text'), 
+                numPossible: probably()
+            };
         }
     }
 }
