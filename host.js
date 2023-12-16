@@ -153,6 +153,8 @@ function xAxB(input, target, type) {
 function newRound() {
     while(!check(target)) {
         target = getRandom(10000);
+        times = 0;
+        setProbablyAnswers();
     }
 }
 
@@ -183,5 +185,3 @@ function inquire() {
         }
     }
 }
-
-setProbablyAnswers();
