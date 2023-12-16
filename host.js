@@ -152,7 +152,7 @@ function xAxB(input, target, type) {
 // onload後先設定題目
 function startGame() {
     while(!check(target)) {
-    target = getRandom(10000);
+        target = getRandom(10000);
     }
 }
 
