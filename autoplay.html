@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hant-TW" lang="zh-Hant-TW">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<p class="styleTopic" id="guide">1A2B小遊戲</p>
+<div id="gameStarted" hidden="hidden">
+    <input type="text" id="playerGuess" name="playerGuess" placeholder="請輸入四位數密碼" /><br></br>
+    <input class="styledButton" type="button" value="送出" onclick="playerTakeOver()" />
+    <p class="styleText" id="correction"></p>
+    <p class="styleText" id="answered"></p>
+    <p></p>
+    <hr/>    
+    <p class="styleText" id="answer"></p>
+</div>
+<p></p>
+<hr/>
+<div id="beforeGame">
+    <input id="btnNewGame" class="styledButton" type="button" value="開始對弈" onclick="startNewGame()" />
+</div>
+</body>
+<script src="host.js"></script>
+<script src="player.js"></script>
+<script>
+function startNewGame() {
+    host.newRound();
+    document.getElementById("correction").innerHTML = '';
+    document.getElementById("gameStarted").style.display = 'block';
+    document.getElementById("btnNewGame").value = "重新對弈";
+
+    player.newRound();
+    document.getElementById("answer").innerHTML = '';
+}
+
+function playerTakeOver() {
+    var playerGuessElement = document.getElementById("playerGuess");
+    var answerElement = document.getElementById("answer");
+
+    while (true) {
+        var playerGuessString = playerGuessElement.value;
+        var result = host.inquire(playerGuessString);
+        if (result == 'invalid input') {
+            document.getElementById("correction").innerHTML = '您的輸入格式有誤，請確認後再重新輸入(如有問題請回覆error code給管理員)';
+        }
+        else if (result.gameStatus === 'finish') {
+            document.getElementById("correction").innerHTML = '恭喜猜中正確答案(您共猜了' + result.times + '次)';
+            break;
+        }
+        else if (result.gameStatus === 'continue') {
+            document.getElementById("answered").innerHTML = playerGuessString + '-->' + result.xAxB + '(還剩下' + result.numPossible + '種可能性)' + '<br></br>' + document.getElementById("answered").innerHTML;
+
+            var match = result.xAxB.match(/(\d)A(\d)B/);
+            var result = player.inquire(
+                playerGuessString, 
+                match[1], 
+                match[2]
+            );
+            if (result === 'invalid input') {
+                answerElement.innerHTML = '您的密碼輸入格式有誤!';
+            }
+            else if (result == 'invalid hint') {
+                answerElement.innerHTML = '您輸入的結果格式有誤!';
+            }
+            else {
+                answerElement.innerHTML = '請猜猜看' + result.suggest + '(目前還剩下' + result.numPossible + '種可能)';
+
+                playerGuessElement.value = result.suggest;
+            }
+        }
+        else {
+            console.log('impossible execution path');
+        }
+    }
+}
+</script>
+</html>

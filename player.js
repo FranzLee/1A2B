@@ -17,6 +17,7 @@ var player = {
     _probablyAnswers: [], 
     _A: 0, 
     _B: 0, 
+    _debugMode: false, 
 
     // 取1~x中隨機整數
     _getRandom: function(x) {
@@ -86,10 +87,10 @@ var player = {
         var length = this._probablyAnswers.length;
 
         for(j = 0; j < length; j++) {
-            console.log(j);
+            if (this._debugMode) { console.log(j); }
             this._xAxB(this._probablyAnswers[j], this._playerCode);
             if(this._ansA != this._A || this._ansB != this._B) {
-                console.log('markup'+ this._probablyAnswers[j]);
+                if (this._debugMode) { console.log('markup'+ this._probablyAnswers[j]); }
                 this._probablyAnswers[j]= '0000';
             }
         }

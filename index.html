@@ -37,7 +37,7 @@ function showInquireResult() {
         document.getElementById("correction").innerHTML = '您的輸入格式有誤，請確認後再重新輸入(如有問題請回覆error code給管理員)';
     }
     else if (result.gameStatus === 'finish') {
-        document.getElementById("correction").innerHTML = '恭喜猜中正確答案(您共猜了' + times + '次)';
+        document.getElementById("correction").innerHTML = '恭喜猜中正確答案(您共猜了' + result.times + '次)';
     }
     else if (result.gameStatus === 'continue') {
         document.getElementById("answered").innerHTML = playerAnswerString + '-->' + result.xAxB + '(還剩下' + result.numPossible + '種可能性)' + '<br></br>' + document.getElementById("answered").innerHTML;

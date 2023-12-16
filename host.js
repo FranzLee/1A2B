@@ -14,6 +14,7 @@ var host = {
     _playerAnswer: 0, 
     _times: 0, 
     _probablyAnswers: [], 
+    _debugMode: false, 
     
     // 取1~x中隨機整數
     _getRandom: function(x) {
@@ -84,9 +85,9 @@ var host = {
         var length = this._probablyAnswers.length;
     
         for(j = 0; j < length; j++) {
-            console.log(j);
+            if (this._debugMode) { console.log(j); }
             if(playerResult != this._xAxB(this._probablyAnswers[j], this._playerAnswer, 'number')) {
-                console.log('markup'+ j);
+                if (this._debugMode) { console.log('markup'+ j); }
                 this._probablyAnswers[j]= '0000';
             }
         }
