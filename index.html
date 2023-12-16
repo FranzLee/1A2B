@@ -22,15 +22,17 @@
 <script src="host.js"></script>
 <script>
 function startNewGame() {
-    newRound();
+    host.newRound();
     
     document.getElementById("gameStarted").style.display = 'block';
     document.getElementById("btnNewGame").value = "重新遊戲";
 }
 
 function showInquireResult() {
-    var playerAnswerString = playerAnswer;
-    var result = inquire();
+    document.getElementById("correction").innerHTML = '';
+
+    var playerAnswerString = document.getElementById("answer").value;
+    var result = host.inquire(playerAnswerString);
     if (result == 'invalid input') {
         document.getElementById("correction").innerHTML = '您的輸入格式有誤，請確認後再重新輸入(如有問題請回覆error code給管理員)';
     }

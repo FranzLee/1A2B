@@ -15,16 +15,26 @@
 <script src="player.js"></script>
 <script>
 function showInquireResult() {
-    var result = inquire();
+    var answerElement = document.getElementById("answer");
+    answerElement.innerHTML = '';
+
+    var result = player.inquire(
+        document.getElementById("code").value, 
+        document.getElementById("responseA").value, 
+        document.getElementById("responseB").value
+    );
+
     if (result === 'invalid input') {
-        document.getElementById("answer").innerHTML = '您的密碼輸入格式有誤!';
+        answerElement.innerHTML = '您的密碼輸入格式有誤!';
     }
     else if (result == 'invalid hint') {
-        document.getElementById("answer").innerHTML = '您輸入的結果格式有誤!';
+        answerElement.innerHTML = '您輸入的結果格式有誤!';
     }
     else {
-        document.getElementById("answer").innerHTML = '請猜猜看' + result.suggest + '(目前還剩下' + result.numPossible + '種可能)';
+        answerElement.innerHTML = '請猜猜看' + result.suggest + '(目前還剩下' + result.numPossible + '種可能)';
     }
 }
+
+player.newRound();
 </script>
 </html>
