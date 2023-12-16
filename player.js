@@ -1,43 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hant-TW" lang="zh-Hant-TW">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<style>
-.styledButton {
-            border: 0;
-            line-height: 2.5;
-            padding: 0 20px;
-            font-size: 1rem;
-            text-align: center;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-            border-radius: 10px;
-            background-color: rgba(220, 0, 0, 1);
-            background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
-            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-        }
-
-.styledButton:hover {
-    background-color: rgba(255, 0, 0, 1);
-}
-
-.styledButton:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
-}
-.styleTopic {
-    color: rgba(153,153,255,1);
-    font-size: xx-large;
-    font-weight: bold;
-}
-
- .styleText {
-    color: rgba(153, 153, 255, 1);
-    font-size: medium;
-}
-</style>
-</head>
-<body>
-<script>
+/**
+ * Copyright (C) LEE'S INC. - All Rights Reserved.
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ * Proprietary and confidential.
+ * Written by Franz Lee (Franz) <franz.e.lee@gmail.com>, Sep. 2023.
+ *
+ * This script servers as the `host` role in 1A2B game.
+ * 
+ * @author Franz Lee (Franz) <franz.e.lee@gmail.com>, Sep. 2023.
+ * @link https://github.com/FranzLee/
+ */
 var playerCode = 0;
 var ansAll = 0;
 var ansA = 0;
@@ -194,13 +165,3 @@ function inquire() {
 }
 
 setProbablyAnswers();
-</script>
-<p class="styleTopic" id="guide">1A2B破解器(4位數、各位數不重複)</p>
-<p class="styleText" id="describition">這個破解器可以幫助您猜出1A2B的答案，請在以下二格分別輸入您的猜測密碼及結果</p>
-<input type="text" id="code" name="code" placeholder="您輸入的密碼(eg.1234)"><br></br>
-<input type="text" id="responseA" name="response" placeholder="1" size="2">A<input type="text" id="responseB" name="response" placeholder="1" size="2">B<br></br>
-<input class="styledButton" type="button" value="查詢" onclick="inquire()">
-<p class="styleText" id="answer"></p>
-
-</body>
-</html>
