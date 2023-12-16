@@ -64,7 +64,7 @@ function playerTakeOver() {
                 answerElement.innerHTML = '您輸入的結果格式有誤!';
             }
             else {
-                answerElement.innerHTML = '請猜猜看' + result.suggest + '(目前還剩下' + result.numPossible + '種可能)';
+                answerElement.innerHTML = '請猜猜看' + result.suggest + '(目前還剩下' + result.numPossible + '種可能) <br/><br/>' + answerElement.innerHTML;
 
                 playerGuessElement.value = result.suggest;
             }
