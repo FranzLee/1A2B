@@ -1,42 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hant-TW" lang="zh-Hant-TW">
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<style>
-.styledButton {
-            border: 0;
-            line-height: 2.5;
-            padding: 0 20px;
-            font-size: 1rem;
-            text-align: center;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-            border-radius: 10px;
-            background-color: rgba(220, 0, 0, 1);
-            background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
-            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-        }
-
-.styledButton:hover {
-    background-color: rgba(255, 0, 0, 1);
-}
-
-.styledButton:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
-}
-.styleTopic {
-    color: rgba(153,153,255,1);
-    font-size: xx-large;
-    font-weight: bold;
-}
-
- .styleText {
-    color: rgba(153, 153, 255, 1);
-    font-size: medium;
-}
-</style>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="./1A2BDB/decryptor.css"/>
+<audio controls autoplay loop="true" muted>
+    <source src="./1A2BDB/idol.mp3">
+</audio>
 </head>
 <body>
+
 <script>
 var playerCode = 0;
 var ansAll = 0;
@@ -195,12 +168,21 @@ function inquire() {
 
 setProbablyAnswers();
 </script>
-<p class="styleTopic" id="guide">1A2B破解器(4位數、各位數不重複)</p>
-<p class="styleText" id="describition">這個破解器可以幫助您猜出1A2B的答案，請在以下二格分別輸入您的猜測密碼及結果</p>
-<input type="text" id="code" name="code" placeholder="您輸入的密碼(eg.1234)"><br></br>
-<input type="text" id="responseA" name="response" placeholder="1" size="2">A<input type="text" id="responseB" name="response" placeholder="1" size="2">B<br></br>
-<input class="styledButton" type="button" value="查詢" onclick="inquire()">
-<p class="styleText" id="answer"></p>
+
+<div class="styleTopic" id="guide">1A2B破解器</div>
+<div class="styleTopica" id="guide">(4位數、各位數不重複)</div>
+<div class="styleText" id="describition">這個破解器可以幫助您猜出1A2B的答案</div>
+<div class="styleText" id="describition">請在以下二格分別輸入您的猜測密碼及結果</div>
+<div style="height: 75px; display: flex; align-items: flex-end;justify-content: center;">
+    <input type="text; " id="code" name="code" placeholder="您輸入的密碼(eg.1234)" style="font-size: 40px;"><br></br>
+</div>
+<div style="display: flex;justify-content: center; align-items: flex-end;height: 50px;">
+    <input type="text" id="responseA" name="response" placeholder="1" size="2" style="font-size: 30px;"><span class="ab">A</span><input type="text" id="responseB" name="response" placeholder="1" size="2" style="font-size: 30px;"><span class="ab">B</span>
+</div>   
+<div style="display: flex;justify-content: center;align-items: flex-end; height: 100px;">
+    <input class="styledButton" type="button" value="查詢" onclick="inquire()">
+</div>
+<p class="styletexta" id="answer"></p>
 
 </body>
 </html>
