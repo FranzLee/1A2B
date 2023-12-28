@@ -1,0 +1,48 @@
+.styledButton {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+    justify-content: center;
+}
+
+.styledButton:hover {
+background-color: rgba(255, 0, 0, 1);
+}
+
+.styledButton:active {
+box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+.styleTopic {
+color: rgb(232, 101, 72);
+font-size: 50px;
+font-weight: bold;
+height: 100px;
+}
+
+.styleText {
+color: rgb(88, 149, 196);
+font-size: medium;
+text-align: center;
+}
+body {
+    background-image: url("mix.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position:center;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+.input{
+    font-size: 40px;
+}
+.button{
+    height: 50px;
+}
